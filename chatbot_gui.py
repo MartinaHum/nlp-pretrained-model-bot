@@ -4,7 +4,7 @@ import tkinter.scrolledtext as tks #creates a scrollable text window
 from datetime import datetime
 from tkinter import *
 
-
+#Inserts the user_input into the chatWindow
 def create_and_insert_user_frame(user_input):
   userFrame = Frame(chatWindow, bg="#d0ffff")
   Label(
@@ -22,7 +22,7 @@ def create_and_insert_user_frame(user_input):
   chatWindow.insert('end', '\n ', 'tag-right')
   chatWindow.window_create('end', window=userFrame)
 
-
+#Inserts the bot response into the chatWindow
 def create_and_insert_bot_frame(bot_response):
   botFrame = Frame(chatWindow, bg="#ffffd0")
   Label(
@@ -44,7 +44,7 @@ def create_and_insert_bot_frame(bot_response):
   chatWindow.window_create('end', window=botFrame)
   chatWindow.insert(END, "\n\n" + "")
 
-
+#Collects the user input from the userEntryBox, gets the bot_response
 def send(event):
     chatWindow.config(state=NORMAL)
 
@@ -58,16 +58,18 @@ def send(event):
     userEntryBox.delete("1.0","end")
     chatWindow.see('end')
 
-
+#The main GUI window that contains everything
 baseWindow = Tk()
 baseWindow.title("The Sophisticated Bot")
 baseWindow.geometry("500x250")
 
+#Displays the conversation between a user and the chatbot
 chatWindow = tks.ScrolledText(baseWindow, font="Arial")
 chatWindow.tag_configure('tag-left', justify='left')
 chatWindow.tag_configure('tag-right', justify='right')
 chatWindow.config(state=DISABLED)
 
+#A button that sends the user query to the Chatbot
 sendButton = Button(
     baseWindow,
     font=("Verdana", 12, 'bold'),
@@ -80,6 +82,7 @@ sendButton.bind("<Button-1>", send)
 baseWindow.bind('<Return>', send)
 
 #text box for user entry
+#For the user to type their queries for the Chatbot
 userEntryBox = Text(baseWindow, bd=1, bg="white", width=38, font="Arial")
 
 chatWindow.place(x=1, y=1, height=200, width=500)
